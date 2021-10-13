@@ -24,6 +24,7 @@ const colors = {
 const main_types = Object.keys(colors); // ["fire", "grass", "electric", ...]
 
 let allPokemon = [];
+let favorites = [];
 
 const fetchPokemon = async () => {
     for (let i = 1; i <= pokemon_count; i++) {
@@ -40,8 +41,6 @@ const getPokemon = async function (id) {
     const data = await response.json();
 
     return data;
-
-    //createPokemonCard(data);
 };
 
 const renderPokemon = async function (pokemonArray) {
@@ -55,20 +54,20 @@ const createPokemonCard = (pokemon) => {
     const name = pokemon.name[0].toUpperCase() + pokemon.name.slice(1);
     const id = pokemon.id.toString().padStart(3, '0');
 
-    const poke_types = pokemon.types.map(type => type.type.name);
+    //const poke_types = pokemon.types.map(type => type.type.name);
     //const type = main_types.find(type => poke_types.indexOf(type) > -1);
     const type1 = pokemon.types[0].type.name;
     const type2 = pokemon.types.length > 1 ? pokemon.types[1].type.name : null;
     const color = colors[type1];
 
-    console.log(`${type1} | ${type2}`);
+    //console.log(`${type1} | ${type2}`);
 
     pokemonEl.style.backgroundColor = color;
 
     const officialArtwork = pokemon.sprites.other["official-artwork"].front_default;
 
     const pokemonInnerHTML = `
-    <div><a href="#" id="${pokemon.id}">Favorite</a></div>
+    <div class="favorite"><a href="#" id="${pokemon.id}">&heartsuit;</a></div>
     <div class="img-container">
         <!--<img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemon.id}.png"" alt="${name}">-->
         <img src="${officialArtwork}" />
@@ -83,6 +82,13 @@ const createPokemonCard = (pokemon) => {
     pokemonEl.innerHTML = pokemonInnerHTML;
 
     poke_container.appendChild(pokemonEl);
+
+    // FIXME: It double-favorites. Not good. Maybe write a function. Maybe an if statement. I really don't know.
+    /*const heart = document.getElementById(pokemon.id);
+    heart.addEventListener("click", () => {
+        pokemon.isFavorite = true;
+        favorites.push(pokemon);
+    });*/
 };
 
 async function loadAllPokemon() {
@@ -115,9 +121,21 @@ function updateSearchResults() {
 loadAllPokemon();
 
 const searchButton = document.getElementById("searchButton");
+const all = document.getElementById("all");
+const favs = document.getElementById("favorites");
 
 searchButton.addEventListener("click", () => {
     updateSearchResults();
+});
+
+all.addEventListener("click", () => {
+    clearPokemon();
+    loadAllPokemon();
+});
+
+favs.addEventListener("click", () => {
+    clearPokemon();
+    renderPokemon(favorites);
 });
 
 searchInput.addEventListener("keyup", () => updateSearchResults());

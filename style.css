@@ -50,12 +50,14 @@ h1 {
   width: 100px;
   height: 100px;
   text-align: center;
+  margin: auto;
 }
 
 .pokemon .img-container img {
   /* max-width: 90%; */
   width:120%;
   margin-top: 00px;
+  margin: auto;
 }
 
 .pokemon .info {
@@ -80,4 +82,14 @@ h1 {
   font-size: 0.7em;
   text-transform: capitalize;
   font-weight: 200;
+}
+
+.favorite a {
+  text-decoration: none;
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 1.5em;
+}
+
+.favorite a:hover {
+  color: #F52F07;
 }
