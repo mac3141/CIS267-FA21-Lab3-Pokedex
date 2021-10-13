@@ -27,7 +27,9 @@ let allPokemon = [];
 
 const fetchPokemon = async () => {
     for (let i = 1; i <= pokemon_count; i++) {
-        allPokemon.push(await getPokemon(i));
+        let p = await getPokemon(i);
+        p.isFavorite = false;
+        allPokemon.push(p);
     }
 };
 
@@ -54,14 +56,19 @@ const createPokemonCard = (pokemon) => {
     const id = pokemon.id.toString().padStart(3, '0');
 
     const poke_types = pokemon.types.map(type => type.type.name);
-    const type = main_types.find(type => poke_types.indexOf(type) > -1);
-    const color = colors[type];
+    //const type = main_types.find(type => poke_types.indexOf(type) > -1);
+    const type1 = pokemon.types[0].type.name;
+    const type2 = pokemon.types.length > 1 ? pokemon.types[1].type.name : null;
+    const color = colors[type1];
+
+    console.log(`${type1} | ${type2}`);
 
     pokemonEl.style.backgroundColor = color;
 
     const officialArtwork = pokemon.sprites.other["official-artwork"].front_default;
 
     const pokemonInnerHTML = `
+    <div><a href="#" id="${pokemon.id}">Favorite</a></div>
     <div class="img-container">
         <!--<img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemon.id}.png"" alt="${name}">-->
         <img src="${officialArtwork}" />
@@ -69,7 +76,7 @@ const createPokemonCard = (pokemon) => {
     <div class="info">
         <span class="number">#${id}</span>
         <h3 class="name">${name}</h3>
-        <small class="type">Type: <span>${type}</span> </small>
+        <small class="type">Type: <span>${type1}</span> </small>
     </div>
     `;
 
@@ -87,23 +94,36 @@ function clearPokemon() {
     poke_container.innerHTML = "";
 }
 
+function updateSearchResults() {
+    const searchInput = document.getElementById("searchInput");
+    const searchQuery = searchInput.value;
+
+    console.log(searchQuery);
+    console.log(typeof (searchQuery));
+
+    // search by name
+    let searchResults = allPokemon.filter(pokemon => {
+        return pokemon.name.toLowerCase().includes(searchQuery.toLowerCase());
+    });
+
+    // search by id
+
+    clearPokemon();
+    renderPokemon(searchResults);
+}
+
 loadAllPokemon();
 
 const searchButton = document.getElementById("searchButton");
 
 searchButton.addEventListener("click", () => {
-    const searchInput = document.getElementById("searchInput"); // add search bar with id "searchInput"
-    const searchQuery = searchInput.value;
+    updateSearchResults();
+});
 
-    console.log(searchQuery);
+searchInput.addEventListener("keyup", () => updateSearchResults());
 
-    // If pokemon name or number starts with search, find pokemon and load
-    let searchResults = allPokemon.filter(pokemon => {
-        if (pokemon.name === searchQuery) {
-            return true;
-        }
-    });
-
-    clearPokemon();
-    renderPokemon(searchResults);
+document.addEventListener("keypress", e => {
+    if (e.key == "Enter") {
+        updateSearchResults();
+    }
 });
