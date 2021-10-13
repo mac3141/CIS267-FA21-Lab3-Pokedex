@@ -107,12 +107,16 @@ function updateSearchResults() {
     console.log(searchQuery);
     console.log(typeof (searchQuery));
 
-    // search by name
-    let searchResults = allPokemon.filter(pokemon => {
-        return pokemon.name.toLowerCase().includes(searchQuery.toLowerCase());
-    });
 
-    // search by id
+
+    // search by name or id, HALLELUJAH FIRST TRY
+    let searchResults = allPokemon.filter(pokemon => {
+        if (pokemon.name.toLowerCase().includes(searchQuery.toLowerCase()) || pokemon.id.toString().includes(searchQuery)) {
+            return true;
+        }
+
+        //return pokemon.name.toLowerCase().includes(searchQuery.toLowerCase());
+    });
 
     clearPokemon();
     renderPokemon(searchResults);
