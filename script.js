@@ -58,6 +58,12 @@ const createPokemonCard = (pokemon) => {
     //const type = main_types.find(type => poke_types.indexOf(type) > -1);
     const type1 = pokemon.types[0].type.name;
     const type2 = pokemon.types.length > 1 ? pokemon.types[1].type.name : null;
+
+    let allTypes = [type1];
+    if (type2 != null) {
+        allTypes.push(type2);
+    }
+    
     const color = colors[type1];
 
     //console.log(`${type1} | ${type2}`);
@@ -75,7 +81,7 @@ const createPokemonCard = (pokemon) => {
     <div class="info">
         <span class="number">#${id}</span>
         <h3 class="name">${name}</h3>
-        <small class="type">Type: <span>${type1}</span> </small>
+        <small class="type">Type: <span>${allTypes}</span> </small>
     </div>
     `;
 
