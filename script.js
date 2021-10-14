@@ -80,7 +80,7 @@ const createPokemonCard = (pokemon) => {
     <div class="info">
         <span class="number">#${id}</span>
         <h3 class="name">${name}</h3>
-        <small class="type">Type: <span>${allTypes}</span> </small>
+        <small class="type">Type: <span>${allTypes.join(" | ")}</span> </small>
     </div>
     `;
 
@@ -88,12 +88,16 @@ const createPokemonCard = (pokemon) => {
 
     poke_container.appendChild(pokemonEl);
 
-    // FIXME: It double-favorites. Not good. Maybe write a function. Maybe an if statement. I really don't know.
-    /*const heart = document.getElementById(pokemon.id);
+    // It works, but the heart color changing is weird and I don't like how updating the favorites list works
+    const heart = document.getElementById(pokemon.id);
     heart.addEventListener("click", () => {
-        pokemon.isFavorite = true;
-        favorites.push(pokemon);
-    });*/
+        pokemon.isFavorite = !pokemon.isFavorite;
+        heart.style.color = pokemon.isFavorite ? "#F52F07" : "rgba(255, 255, 255, 0.5)";
+        // Maybe make favorites an array like colors? "name": object -- somehow need to remove specific pokemon when unclick
+        favorites = allPokemon.filter(poke => {
+            return poke.isFavorite;
+        });
+    });
 };
 
 async function loadAllPokemon() {
