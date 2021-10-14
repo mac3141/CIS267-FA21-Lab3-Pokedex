@@ -1,24 +1,24 @@
 const poke_container = document.getElementById('poke-container');
 const pokemon_count = 150;
 const typeColors = {
-    fire: '#fd7d24',
-    grass: '#9bcc50',
-    electric: '#eed535',
-    water: '#4592c4',
-    ground: '#ab9842',
-    rock: '#a38c21',
-    fairy: '#fdb9e9',
-    poison: '#b97fc9',
-    bug: '#729f3f',
-    dragon: '#7038f8',
-    psychic: '#f366b9',
-    flying: '#3dc7ef',
-    fighting: '#d56723',
-    normal: '#a4acaf',
-    ice: '#51c4e7',
-    ghost: '#7b62a3',
-    dark: '#707070',
-    steel: '#9eb7b8'
+    fire: '#FEAC72',
+    grass: '#B6DA81',
+    electric: '#F4E47C',
+    water: '#73ADD3',
+    ground: '#C6B56C',
+    rock: '#D5B834',
+    fairy: '#FEEBF9',
+    poison: '#D0A9DB',
+    bug: '#92BF5F',
+    dragon: '#9D75FA',
+    psychic: '#F7A1D3',
+    flying: '#7BDAF4',
+    fighting: '#E59461',
+    normal: '#C9CDCF',
+    ice: '#93DBF0',
+    ghost: '#9E8BBB',
+    dark: '#8F8F8F',
+    steel: '#C4D3D4'
 };
 
 const main_types = Object.keys(typeColors); // ["fire", "grass", "electric", ...]
