@@ -155,11 +155,15 @@ searchButton.addEventListener("click", () => {
 all.addEventListener("click", () => {
     clearPokemon();
     renderPokemon(allPokemon);
+    all.classList.add("active");
+    favs.classList.remove("active");
 });
 
 favs.addEventListener("click", () => {
     clearPokemon();
     renderPokemon(favorites);
+    favs.classList.add("active");
+    all.classList.remove("active");
 });
 
 searchInput.addEventListener("keyup", () => updateSearchResults());
