@@ -88,17 +88,28 @@ const createPokemonCard = (pokemon) => {
 
     poke_container.appendChild(pokemonEl);
 
-    // It works, but the heart color changing is weird and I don't like how updating the favorites list works
+    // Now I need to get the heart to change color again when I hover over it. Otherwise it works.
     const heart = document.getElementById(pokemon.id);
+    heart.style.color = pokemon.isFavorite ? "#F52F07" : "rgba(255, 255, 255, 0.5)";
     heart.addEventListener("click", () => {
-        pokemon.isFavorite = !pokemon.isFavorite;
+        updateFavorites(pokemon);
         heart.style.color = pokemon.isFavorite ? "#F52F07" : "rgba(255, 255, 255, 0.5)";
-        // Maybe make favorites an array like colors? "name": object -- somehow need to remove specific pokemon when unclick
-        favorites = allPokemon.filter(poke => {
-            return poke.isFavorite;
-        });
+        // console.log(favorites);
     });
 };
+
+function updateFavorites(pokemon) {
+    pokemon.isFavorite = !pokemon.isFavorite;
+
+    // push if isFavorite is true
+    if (pokemon.isFavorite) {
+        favorites.push(pokemon);
+    }
+    // remove if isFavorite is false
+    else {
+        favorites.splice(favorites.indexOf(pokemon), 1);
+    }
+}
 
 async function loadAllPokemon() {
     await fetchPokemon();
@@ -143,7 +154,7 @@ searchButton.addEventListener("click", () => {
 
 all.addEventListener("click", () => {
     clearPokemon();
-    loadAllPokemon();
+    renderPokemon(allPokemon);
 });
 
 favs.addEventListener("click", () => {
