@@ -1,6 +1,6 @@
 const poke_container = document.getElementById('poke-container');
 const pokemon_count = 150;
-const colors = {
+const typeColors = {
     fire: '#fd7d24',
     grass: '#9bcc50',
     electric: '#eed535',
@@ -21,7 +21,7 @@ const colors = {
     steel: '#9eb7b8'
 };
 
-const main_types = Object.keys(colors); // ["fire", "grass", "electric", ...]
+const main_types = Object.keys(typeColors); // ["fire", "grass", "electric", ...]
 
 let allPokemon = [];
 let favorites = [];
@@ -54,8 +54,6 @@ const createPokemonCard = (pokemon) => {
     const name = pokemon.name[0].toUpperCase() + pokemon.name.slice(1);
     const id = pokemon.id.toString().padStart(3, '0');
 
-    //const poke_types = pokemon.types.map(type => type.type.name);
-    //const type = main_types.find(type => poke_types.indexOf(type) > -1);
     const type1 = pokemon.types[0].type.name;
     const type2 = pokemon.types.length > 1 ? pokemon.types[1].type.name : null;
 
@@ -63,12 +61,13 @@ const createPokemonCard = (pokemon) => {
     if (type2 != null) {
         allTypes.push(type2);
     }
-    
-    const color = colors[type1];
+
+    let colors = [typeColors[type1]];
+    colors.push(pokemon.types.length > 1 ? typeColors[type2] : typeColors[type1]);
 
     //console.log(`${type1} | ${type2}`);
 
-    pokemonEl.style.backgroundColor = color;
+    pokemonEl.style.background = `linear-gradient(30deg, ${colors[0]} 50%, ${colors[1]} 50%)`;
 
     const officialArtwork = pokemon.sprites.other["official-artwork"].front_default;
 
