@@ -91,6 +91,17 @@ const createPokemonCard = (pokemon) => {
     // Now I need to get the heart to change color again when I hover over it. Otherwise it works.
     const heart = document.getElementById(pokemon.id);
     heart.style.color = pokemon.isFavorite ? "#F52F07" : "rgba(255, 255, 255, 0.5)";
+
+    heart.addEventListener("mouseover", () => {
+        heart.style.color = "#F52F07";
+    });
+
+    heart.addEventListener("mouseout", () => {
+        if (!pokemon.isFavorite) {
+            heart.style.color = "rgba(255, 255, 255, 0.5)";
+        }
+    });
+
     heart.addEventListener("click", () => {
         updateFavorites(pokemon);
         heart.style.color = pokemon.isFavorite ? "#F52F07" : "rgba(255, 255, 255, 0.5)";

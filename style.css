@@ -88,8 +88,5 @@ h1 {
   text-decoration: none;
   color: rgba(255, 255, 255, 0.5);
   font-size: 1.5em;
-}
-
-.favorite a:hover {
-  color: #F52F07;
+  transition: 0.15s;
 }
