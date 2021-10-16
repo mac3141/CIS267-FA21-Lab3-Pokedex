@@ -25,18 +25,38 @@ const main_types = Object.keys(typeColors); // ["fire", "grass", "electric", ...
 
 let allPokemon = [];
 let favorites = [];
+let pokemonSpecies = [];
 
 const fetchPokemon = async () => {
     for (let i = 1; i <= pokemon_count; i++) {
         let p = await getPokemon(i);
         p.isFavorite = false;
+        p.isLengendary = false; // working on it
         allPokemon.push(p);
+    }
+};
+
+const fetchPokemonSpecies = async () => {
+    for (let i = 1; i <= pokemon_count; i++) {
+        let p = await getPokemonSpecies(i);
+        if (p.habitat.is_legendary) {
+            pokemonSpecies.push(p);
+        }
     }
 };
 
 const getPokemon = async function (id) {
     // Get Pokemon data from pokeapi
     const url = `https://pokeapi.co/api/v2/pokemon/${id}`;
+    const response = await fetch(url);
+    const data = await response.json();
+
+    return data;
+};
+
+const getPokemonSpecies = async function (id) {
+    // Get Pokemon data from pokeapi
+    const url = `https://pokeapi.co/api/v2/pokemon-species/${id}`;
     const response = await fetch(url);
     const data = await response.json();
 
