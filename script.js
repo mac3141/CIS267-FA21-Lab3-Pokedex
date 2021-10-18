@@ -31,7 +31,7 @@ const fetchPokemon = async () => {
         let pokemon = await getPokemon(i);
         let species = await getPokemonSpecies(i);
         pokemon.isFavorite = false;
-        pokemon.isLengendary = species.habitat.is_legendary;
+        pokemon.isLegendary = species.is_legendary;
         allPokemon.push(pokemon);
     }
 };
@@ -141,7 +141,6 @@ function updateSearchResults() {
     const searchQuery = searchInput.value;
 
     console.log(searchQuery);
-    console.log(typeof (searchQuery));
 
     // search by name or id, HALLELUJAH FIRST TRY
     let searchResults = allPokemon.filter(pokemon => {
@@ -154,11 +153,16 @@ function updateSearchResults() {
     renderPokemon(searchResults);
 }
 
+// Need an updateFilterResults like updateSearchResults
+
 loadAllPokemon();
+
+// EVENT LISTENERS
 
 const searchButton = document.getElementById("searchButton");
 const all = document.getElementById("all");
 const favs = document.getElementById("favorites");
+// const legendary = document.getElementById("legendary");
 
 searchButton.addEventListener("click", () => {
     updateSearchResults();
@@ -183,6 +187,20 @@ favs.addEventListener("click", () => {
     favs.classList.add("active");
     all.classList.remove("active");
 });
+
+// FIXME: This is only 1 filter button, and there's still 18 more, and and this one REALLY needs fixing...like BAD. Fun times ahead.
+// legendary.addEventListener("click", () => {
+//     legendary_count++;
+
+//     let legends = allPokemon.filter(pokemon => {
+//         return pokemon.isLegendary;
+//     });
+
+//     if (legendary_count % 2 != 0) {
+//         clearPokemon();
+//         renderPokemon(legends);
+//     }
+// });
 
 searchInput.addEventListener("keyup", () => updateSearchResults());
 

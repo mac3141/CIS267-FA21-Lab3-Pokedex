@@ -34,7 +34,7 @@
             <li class="nav-item">
               <a class="nav-link" id="favorites" href="#">Favorites</a>
             </li>
-            <li class="nav-item dropdown">
+            <!-- <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
                 aria-expanded="false">
                 Filters?
@@ -47,7 +47,7 @@
                 </li>
                 <li><a class="dropdown-item" href="#">Something else here</a></li>
               </ul>
-            </li>
+            </li> -->
           </ul>
           <form class="d-flex">
             <input class="form-control me-2" id="searchInput" type="text" placeholder="Search by ID or name"
@@ -57,6 +57,72 @@
         </div>
       </div>
     </nav>
+
+    <!-- Filters -->
+    <div class="filter bg-light">
+      <p class="text-muted" id="sort-by">Sort by:</p>
+      <!-- Maybe generate this dynamically to add event listeners to each button -->
+      <!-- isSelected = false on generation, isSelected = !isSelected on every click -->
+      <!-- Then find all selected groups and update filter results every time a button is clicked (like search results) -->
+      <div class="btn-group btn-group-sm btn-group-vertical" id="filter-btns" role="group" aria-label="Basic checkbox toggle button group">
+        <input type="checkbox" class="btn-check" id="legendary" autocomplete="off">
+        <label class="btn btn-outline-success" for="legendary">Legendary</label>
+
+        <input type="checkbox" class="btn-check" id="fire" autocomplete="off">
+        <label class="btn btn-outline-success" for="fire">Fire</label>
+
+        <input type="checkbox" class="btn-check" id="grass" autocomplete="off">
+        <label class="btn btn-outline-success" for="grass">Grass</label>
+
+        <input type="checkbox" class="btn-check" id="electric" autocomplete="off">
+        <label class="btn btn-outline-success" for="electric">Electric</label>
+
+        <input type="checkbox" class="btn-check" id="water" autocomplete="off">
+        <label class="btn btn-outline-success" for="water">Water</label>
+
+        <input type="checkbox" class="btn-check" id="ground" autocomplete="off">
+        <label class="btn btn-outline-success" for="ground">Ground</label>
+
+        <input type="checkbox" class="btn-check" id="rock" autocomplete="off">
+        <label class="btn btn-outline-success" for="rock">Rock</label>
+
+        <input type="checkbox" class="btn-check" id="fairy" autocomplete="off">
+        <label class="btn btn-outline-success" for="fairy">Fairy</label>
+
+        <input type="checkbox" class="btn-check" id="poison" autocomplete="off">
+        <label class="btn btn-outline-success" for="poison">Poison</label>
+
+        <input type="checkbox" class="btn-check" id="bug" autocomplete="off">
+        <label class="btn btn-outline-success" for="bug">Bug</label>
+
+        <input type="checkbox" class="btn-check" id="dragon" autocomplete="off">
+        <label class="btn btn-outline-success" for="dragon">Dragon</label>
+
+        <input type="checkbox" class="btn-check" id="psychic" autocomplete="off">
+        <label class="btn btn-outline-success" for="psychic">Psychic</label>
+
+        <input type="checkbox" class="btn-check" id="flying" autocomplete="off">
+        <label class="btn btn-outline-success" for="flying">Flying</label>
+
+        <input type="checkbox" class="btn-check" id="fighting" autocomplete="off">
+        <label class="btn btn-outline-success" for="fighting">Fighting</label>
+
+        <input type="checkbox" class="btn-check" id="normal" autocomplete="off">
+        <label class="btn btn-outline-success" for="normal">Normal</label>
+
+        <input type="checkbox" class="btn-check" id="ice" autocomplete="off">
+        <label class="btn btn-outline-success" for="ice">Ice</label>
+
+        <input type="checkbox" class="btn-check" id="ghost" autocomplete="off">
+        <label class="btn btn-outline-success" for="ghost">Ghost</label>
+
+        <input type="checkbox" class="btn-check" id="dark" autocomplete="off">
+        <label class="btn btn-outline-success" for="dark">Dark</label>
+
+        <input type="checkbox" class="btn-check" id="steel" autocomplete="off">
+        <label class="btn btn-outline-success" for="steel">Steel</label>
+      </div>
+    </div>
 
     <div class="poke-container" id="poke-container"></div>
   </div>
