@@ -89,13 +89,12 @@ h1 {
 }
 
 .filter {
-  position: absolute;
-  top: 0;
-  right: 0;
+  display: flex;
   padding: 10px;
 }
 
 #sort-by {
+  padding: 0px 10px 0px 0px;
   font-weight: bold;
   font-size: small;
 }

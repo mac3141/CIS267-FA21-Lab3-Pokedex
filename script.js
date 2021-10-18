@@ -153,7 +153,7 @@ function updateSearchResults() {
     renderPokemon(searchResults);
 }
 
-// Need an updateFilterResults like updateSearchResults
+// Need an updateFilters like updateSearchResults
 
 loadAllPokemon();
 
@@ -162,7 +162,6 @@ loadAllPokemon();
 const searchButton = document.getElementById("searchButton");
 const all = document.getElementById("all");
 const favs = document.getElementById("favorites");
-// const legendary = document.getElementById("legendary");
 
 searchButton.addEventListener("click", () => {
     updateSearchResults();
