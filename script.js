@@ -153,7 +153,9 @@ function updateSearchResults() {
     renderPokemon(searchResults);
 }
 
-// Need an updateFilters like updateSearchResults
+function updateFilters() {
+    // loop through checkboxes, find all checked, render pokemon with the checked types
+}
 
 loadAllPokemon();
 
@@ -162,6 +164,13 @@ loadAllPokemon();
 const searchButton = document.getElementById("searchButton");
 const all = document.getElementById("all");
 const favs = document.getElementById("favorites");
+
+// Got help from https://medium.com/swlh/building-a-checkbox-filter-with-vanilla-javascript-29153cf466bd
+const checkboxes = document.querySelectorAll("input[type='checkbox']");
+checkboxes.forEach(box => {
+    box.checked = false;
+    box.addEventListener("change", () => updateFilters()); // working on it
+});
 
 searchButton.addEventListener("click", () => {
     updateSearchResults();
