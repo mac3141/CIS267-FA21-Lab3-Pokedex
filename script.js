@@ -155,6 +155,17 @@ function updateSearchResults() {
 
 function updateFilters() {
     // loop through checkboxes, find all checked, render pokemon with the checked types
+    const checked = [];
+    const checkboxes = document.querySelectorAll("input[type='checkbox']");
+
+    checkboxes.forEach(box => {
+        if (box.checked) {
+            // push pokemon with type that lines up with box value
+        }
+    });
+
+    clearPokemon();
+    renderPokemon(checked);
 }
 
 loadAllPokemon();
