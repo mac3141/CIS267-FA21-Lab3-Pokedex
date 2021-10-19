@@ -155,17 +155,42 @@ function updateSearchResults() {
 
 function updateFilters() {
     // loop through checkboxes, find all checked, render pokemon with the checked types
-    const checked = [];
-    const checkboxes = document.querySelectorAll("input[type='checkbox']");
+    let checkedTypes = [];
 
     checkboxes.forEach(box => {
-        if (box.checked) {
+        if (box.checked && box.id == "legendary") {
+            for (let pokemon of allPokemon) {
+                if (pokemon.isLegendary) {
+                    checkedTypes.push(pokemon);
+                }
+            }
+        }
+        else if (box.checked) {
             // push pokemon with type that lines up with box value
+            for (let pokemon of allPokemon) {
+                if (pokemon.types[0].type.name == box.id && !checkedTypes.includes(pokemon)) {
+                    checkedTypes.push(pokemon);
+                }
+
+                if (pokemon.types.length > 1) {
+                    if (pokemon.types[1].type.name == box.id && !checkedTypes.includes(pokemon)) {
+                        checkedTypes.push(pokemon);
+                    }
+                }
+            }
         }
     });
 
     clearPokemon();
-    renderPokemon(checked);
+
+    if (checkedTypes.length == 0) {
+        renderPokemon(allPokemon);
+    }
+    else {
+        renderPokemon(checkedTypes);
+    }
+
+    // console.log(checkedTypes);
 }
 
 loadAllPokemon();
@@ -180,7 +205,9 @@ const favs = document.getElementById("favorites");
 const checkboxes = document.querySelectorAll("input[type='checkbox']");
 checkboxes.forEach(box => {
     box.checked = false;
-    box.addEventListener("change", () => updateFilters()); // working on it
+    box.addEventListener("change", () => {
+        updateFilters();
+    });
 });
 
 searchButton.addEventListener("click", () => {
