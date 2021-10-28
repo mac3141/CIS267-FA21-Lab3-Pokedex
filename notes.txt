@@ -1,0 +1,97 @@
+Steps:
+    1. Create event handler
+    2. Extract values from UI
+    3. Logic / computation with extracted values <-- what to focus on
+    4. Update UI based on changes --> use vue.js to do this, eventually
+        > Finding elements from DOM
+        > Changing inner HTML / modify DOM
+
+How to set up & use vue.js:
+    [v3.vuejs.org]
+    1. Copy CDN script
+    2. Set up vue object
+        > const app = Vue.createApp({
+            data() {
+                return {
+                    lionBucks: 23,
+                    topItem: "Ferocious Fries",
+                    message: "",
+                    reverseMessage: "",
+                    items: [
+                        { name: "Simba Burger", image: "/images/burger.jpg", price: 5.95 },
+                        { name: "Philly Cheese Steak", image: "/images/cheese-steak.jpg", price: 4.95 },
+                        { name: "Chicken Sandwich", image: "/images/chicken-sand.jpg", price: 4.45 },
+                        { name: "Ferocious Fries", image: "/images/fries.jpg", price: 2.95 }
+                    ]
+                };
+            },
+
+            methods: {
+                increaseLionBucks() {
+                    this.lionBucks += 10;
+                },
+                reverse() {
+                    this.reverseMessage = this.message.split("").reverse().join("");
+                }
+            }
+
+            computed: {
+                mostExpensiveItem() {
+                    if (this.items.length === 0) {
+                        return null;
+                    }
+
+                    let max = this.items[0];
+
+                    for (let item of this.items) {
+                        if (item.price > max.price) {
+                            max = item;
+                        }
+                    }
+
+                    return max;
+                }
+            }
+        });
+        > app.mount("#app");
+    
+    >> For images, create new folder and put images with correct name and file type
+        >> Also use v-bind:src for image source attribute (shortcut :src)
+    
+    >> v-for is like a loop
+
+    >> v-if evaluates boolean expression
+
+    >> v-show is better -- includes content, just hidden (display: none;)
+
+    >> Computed properties function and are called like data() properties
+
+    >> Example: <h2>Current Lion Bucks: {{lionBucks}}</h2> --> Current Lion Bucks: 23
+    
+    >> Example: <button @click="increaseLionBucks">More</button>
+                <button @click="lionBucks--">Less</button>
+
+    >> Example: <h3>{{topItem}}</h3>
+                
+    >> Example: <input type="text" name="topItem" id="topItem" v-model="topItem">
+
+    >> Example: v-for="item in items"
+
+    >> Example: v-if="items.length===0" then display something like "no items" OR v-show="items.length===0"
+    
+    !!! IMPORTANT: Vue only works in the Vue container !!!
+
+    !!! You can't use dynamic content in mustache syntax !!!
+
+    !!! Data is static !!!
+
+    !!! ALWAYS USE this.____ !!!
+
+    For Pokedex v2
+    data() {
+        return {
+            allPokemon: [{}],
+            searchTerm: "";
+            filteredPokemon: [{}],
+        }
+    }
